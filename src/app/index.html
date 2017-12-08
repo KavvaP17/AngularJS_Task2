@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app="rootModule" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+    <div class = "panel panel-default">
+        <h1>Task #2</h1>
+    </div>
+    <div ng-controller="contactListCtrl">
+        <div class="row col-md-offset-10 col-md-2 searchInput">
+            <input type='text' class="form-control" placeholder="Search" ng-model='filterValue'/>
+        </div>
+        <form class="form-inline addNewContact" name="userForm" novalidate>
+            <h3>Add new contact</h3>
+            <div class="form-group inputNewContact" ng-class="{ 'has-error' : (userForm.name.$invalid && !userForm.name.$pristine) || nameIsValid(newUser)}">
+                <label for="name">Name:</label>
+                <input type="text"  name="name" class="form-control" id="name" ng-model='newUser' required>
+                <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Name is required.</p>
+                <p ng-show="!userForm.name.$invalid && nameIsValid(newUser)" class="help-block">The name is already used</p>
+            </div>
+            <div class="form-group inputNewContact"  ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
+                <label for="phone">Phone:</label>
+                <input type="text" name="phone" class="form-control" id="phone" ng-model='newPhone' required>
+                <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Phone is required.</p>
+            </div>
+            <button class="btn btn-success" ng-click='addContact()'>Add</button>
+        </form>
+  		<table class="table">
+  			<tr>
+  				<th>Name</th>
+  				<th>Phone</th>
+  				<th>ShowPhones</th>
+                <th>Delete</th>
+  			</tr>
+            <tr ng-repeat="item in objToArray(itemList) | filter:{name : filterValue} | orderBy: 'name' track by $index">
+  				<td><span ng-class="item.name | textColor">{{item.name}}</span></td>
+  				<td><span ng-show="item.show">{{item.phone}}</span></td>
+  				<td><input type="checkbox" ng-model="item.show" /></td>
+                <td><button class='btn btn-danger' ng-click='removeContact(item.name)'>X</button></td>
+  			</tr>
+  		</table>
+  	</div>
+    <script src='./js/angular.min.js'></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.blue{
+    color: blue;
+}
+.red{
+    color: red;
+}
+.searchInput{
+    margin-bottom: 10px;
+}
+.addNewContact{
+    margin-bottom: 40px;
+}
+.inputNewContact{
+    margin: 0 10px;
+    position: relative;
+}
+.help-block{
+    position: absolute;
+    top: 20;
+    left: 0;
+    color: red;
+}
