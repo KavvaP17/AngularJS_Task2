@@ -1,10 +1,10 @@
 angular.module('rootModule')
-    .controller('contactListCtrl', function($scope, itemListService){
+    .controller('contactListCtrl', ['$scope', 'itemListService', function($scope, itemListService){
         $scope.filterValue = '';
         $scope.newUser = '';
         $scope.newPhone = '';
         $scope.itemList = itemListService.getAll();
-        $scope.addContact = function(){
+        $scope.addContact = function(newUser, newPhone){
             if (itemListService.addContact($scope.newUser, $scope.newPhone)){
                 $scope.newUser = '';
                 $scope.userForm.name.$pristine = true;
@@ -18,4 +18,4 @@ angular.module('rootModule')
         $scope.removeContact = itemListService.removeContact;
         $scope.objToArray = itemListService.objToArray;
         $scope.nameIsValid = itemListService.nameIsValid;
-});
+}]);

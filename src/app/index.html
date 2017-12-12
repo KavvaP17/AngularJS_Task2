@@ -11,7 +11,7 @@
     <div class = "panel panel-default">
         <h1>Task #2</h1>
     </div>
-    <div ng-controller="contactListCtrl">
+    <div ng-controller="contactListCtrl" ng-cloak>
         <div class="row col-md-offset-10 col-md-2 searchInput">
             <input type='text' class="form-control" placeholder="Search" ng-model='filterValue'/>
         </div>
@@ -28,7 +28,7 @@
                 <input type="text" name="phone" class="form-control" id="phone" ng-model='newPhone' required>
                 <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Phone is required.</p>
             </div>
-            <button class="btn btn-success" ng-click='addContact()'>Add</button>
+            <button class="btn btn-success" ng-click='addContact(newUser, newPhone)'>Add</button>
         </form>
   		<table class="table">
   			<tr>
@@ -37,7 +37,7 @@
   				<th>ShowPhones</th>
                 <th>Delete</th>
   			</tr>
-            <tr ng-repeat="item in objToArray(itemList) | filter:{name : filterValue} | orderBy: 'name' track by $index">
+            <tr ng-repeat="item in objToArray(itemList) | searchFilter: filterValue | orderBy: 'name' track by $index">
   				<td><span ng-class="item.name | textColor">{{item.name}}</span></td>
   				<td><span ng-show="item.show">{{item.phone}}</span></td>
   				<td><input type="checkbox" ng-model="item.show" /></td>
@@ -45,6 +45,5 @@
   			</tr>
   		</table>
   	</div>
-    <script src='./js/angular.min.js'></script>
 </body>
 </html>

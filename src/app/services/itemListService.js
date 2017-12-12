@@ -1,5 +1,5 @@
 angular.module('rootModule')
-    .factory('itemListService', ( $window )=>{
+    .factory('itemListService', ['$window', ( $window )=>{
 
         let itemsList = {
             'Alex' : {name: 'Alex', phone: '+375291111111', show: true},
@@ -42,8 +42,9 @@ angular.module('rootModule')
             objToArray : function(obj){
                 let arr = [];
                 for(let key in obj){
-                    let item =obj[key];
-                    arr.push(item);
+                    if (obj.hasOwnProperty(key)){
+                        arr.push(obj[key]);
+                    }
                 }
                 return arr;
             },
@@ -52,4 +53,4 @@ angular.module('rootModule')
             }
 
         }
-    })
+    }])
